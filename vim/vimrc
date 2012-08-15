@@ -42,3 +42,6 @@ vmap < <gv
 
 set wildmode=list:full
 set wildmenu
+
+" colocando o clear Buffer para Ctrl + Shift + c
+nno <C-C> <Esc>:let @/=''<CR>
