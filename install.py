@@ -21,7 +21,7 @@ for file_path in glob.glob('*/*'):
                 # already set, nothing to do here
                 continue
 
-        print 'Saving backup for %s.' % home_dotfile_path
+        print('Saving backup for {}'.format(home_dotfile_path))
 
         home_dotfile_backup_path = '%s/%s_backup' % (HOME_DIR, file_name)
 
@@ -30,5 +30,5 @@ for file_path in glob.glob('*/*'):
 
         os.remove(home_dotfile_path)
 
-    print 'Creating symlink for %s.' % file_name
+    print('Creating symlink for {}'.format(file_name))
     os.symlink(symlink_target, home_dotfile_path)
