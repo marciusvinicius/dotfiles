@@ -1,1 +1,49 @@
+export PROMPT_DIRTRIM=2
+	
+function _update_ps1() {
+	PS1="$($GOPATH/bin/powerline-go -cwd-max-depth 2 -hostname-only-if-ssh -error $? )"
+	# Uncomment the following line to automatically clear errors after showing
+	# them once. This not only clears the error for powerline-go, but also for
+	# everything else you run in that shell. Don't enable this if you're not
+	# sure this is what you want.
+	set "?"
+}
 
+if [ "$TERM" != "linux" ] && [ -f "$GOPATH/bin/powerline-go" ]; then
+    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+fi
+
+##ALIAS
+alias __git_find_on_cmdline='__git_find_subcommand'
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+alias egrep='egrep --color=auto'
+alias explorer='wslview'
+alias fgrep='fgrep --color=auto'
+alias grep='grep --color=auto'
+alias l='ls -CF'
+alias la='ls -A'
+alias ll='ls -alF'
+alias ls='ls --color=auto'
+
+#Conda
+# export PATH="/home/marcius/anaconda3/bin:$PATH"  # commented out by conda initialize
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/marcius/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/marcius/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/marcius/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/marcius/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+GOPATH=$HOME/go
+PATH="$GOPATH:$PATH"
